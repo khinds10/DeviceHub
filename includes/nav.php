@@ -15,11 +15,17 @@
               <li class="dropdown active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Choose Device <span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                  <li><a href="weatherclock.php?device=magic-mirror"><span class="glyphicon glyphicon-time glyphicon"></span> Magic Mirror</a></li>
                   <li><a href="weatherclock.php?device=weather-clock"><span class="glyphicon glyphicon-time glyphicon"></span> Weather Clock</a></li>
                   <li><a href="weatherclock.php?device=weather-clock-white"><span class="glyphicon glyphicon-time glyphicon"></span> Weather Clock White</a></li>
+                  <li><a href="weatherclock.php?device=weather-clock-duluth"><span class="glyphicon glyphicon-time glyphicon"></span> Weather Clock Duluth</a></li>
                 </ul>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+      
+      
+
+
