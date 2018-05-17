@@ -4,10 +4,10 @@ include 'includes/nav.php';
 ?>
     <div class="container">
         <?php
-        $devices = array('magic-mirror', 'weather-clock', 'weather-clock-white', 'weather-clock-duluth', 'trip-computer');
+        $devices = array('weather-clock', 'magic-mirror', 'weather-clock-white', 'weather-clock-duluth', 'trip-computer');
         foreach ($devices as $device) { 
         ?>
-        <h1><?=ucwords(preg_replace('/\-/',' ',$device))?></h1>
+        <h2><?=ucwords(preg_replace('/\-/',' ',$device))?></h2>
 
                 <?php
                 // get most recent readings from device 
@@ -17,7 +17,7 @@ include 'includes/nav.php';
                 if ($result = $db->query($sql)) {
                     while($row = $result->fetch_array(MYSQLI_ASSOC)) $myResults[] = $row;
                 }
-                foreach ($myResults as $myResult) print "<h2> Inside: " . $myResult['value1']. " *F / Inside: " . $myResult['value2']. " %</h2>";
+                foreach ($myResults as $myResult) print "<h4 style='color:darkblue; padding-left:25px;'> Inside: " . $myResult['value1']. " *F / Inside: " . $myResult['value2']. " %</h4>";
                 ?>
         <?php
         }

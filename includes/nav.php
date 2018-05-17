@@ -5,9 +5,6 @@
       </div>
       <div class="btn-group btn-group-justified" role="group">
          <div class="btn-group" role="group">
-            <a type="button" href="weatherclock.php?device=magic-mirror" class="btn btn-default">Hall</a>
-         </div>
-         <div class="btn-group" role="group">
             <a type="button" href="weatherclock.php?device=weather-clock" class="btn btn-default">Living</a>
          </div>
          <div class="btn-group" role="group">
