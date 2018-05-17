@@ -17,11 +17,12 @@ include 'includes/nav.php';
                 if ($result = $db->query($sql)) {
                     while($row = $result->fetch_array(MYSQLI_ASSOC)) $myResults[] = $row;
                 }
-                foreach ($myResults as $myResult) print "<h4> Inside: " . $myResult['value1']. " *F / </h4>" . "<h4> Inside: " . $myResult['value2']. " %</h4>";
-                ?>            
+                foreach ($myResults as $myResult) print "<h2> Inside: " . $myResult['value1']. " *F / Inside: " . $myResult['value2']. " %</h2>";
+                ?>
         <?php
         }
         ?>
+        <br/><br/>
     </div>
 <?php
 include 'includes/footer.php';
