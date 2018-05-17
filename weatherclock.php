@@ -2,31 +2,27 @@
 include 'includes/header.php';
 include 'includes/nav.php';
 $device = 'weather-clock';
-if (isset($_GET['device'])) {
-    $device = $_GET['device'];
-}
+if (isset($_GET['device'])) $device = $_GET['device'];
 
 // if date range set, then apply it to the result set
 $dateRange = "`time` >= CURDATE() - INTERVAL 1 DAY";
-if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) {
-    $dateRange = "`time` >= '" . date('Y-m-d G:i:s' , strtotime($_POST['dateStart'])) . "' AND `time` <= '" . date('Y-m-d G:i:s' , strtotime($_POST['dateEnd'])) ."'";
-}
+if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) $dateRange = "`time` >= '" . date('Y-m-d G:i:s' , strtotime($_POST['dateStart'])) . "' AND `time` <= '" . date('Y-m-d G:i:s' , strtotime($_POST['dateEnd'])) ."'";
 ?>
 <style>
     #temp_chart {
         width: 900px; 
         height: 500px;
     }
-    
+
     #humidity_chart {
         width: 900px; 
         height: 500px;
     }
-    
+
     h4 {
         display:inline;
     }
-    
+
     @media (max-width: 900px) {
         #temp_chart {
             width: 450px; 
@@ -53,9 +49,7 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) {
         $sql = "SELECT * FROM devices WHERE `device` = '" . $device ."' AND $dateRange ORDER BY `entry` ASC";
         $myResults = array();
         if ($result = $db->query($sql)) {
-            while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                $myResults[] = $row;
-            }
+            while($row = $result->fetch_array(MYSQLI_ASSOC)) $myResults[] = $row;
         }
         foreach ($myResults as $myResult) print "['".date('M. j',strtotime($myResult['time']))."',".$myResult['value1'].",".$myResult['value3']."],";
         ?>
@@ -79,9 +73,7 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) {
         $sql = "SELECT * FROM devices WHERE `device` = '" . $device ."' AND $dateRange ORDER BY `entry` ASC";
         $myResults = array();
         if ($result = $db->query($sql)) {
-            while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                $myResults[] = $row;
-            }
+            while($row = $result->fetch_array(MYSQLI_ASSOC)) $myResults[] = $row;
         }
         foreach ($myResults as $myResult) print "['".date('M. j',strtotime($myResult['time']))."',".$myResult['value2'].",".$myResult['value4']."],";
         ?>
@@ -106,9 +98,7 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) {
         $sql = "SELECT * FROM devices WHERE `device` = '" . $device ."' ORDER BY `entry` DESC LIMIT 1";
         $myResults = array();
         if ($result = $db->query($sql)) {
-            while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                $myResults[] = $row;
-            }
+            while($row = $result->fetch_array(MYSQLI_ASSOC)) $myResults[] = $row;
         }
         foreach ($myResults as $myResult) 
             print "<h4> Inside: " . $myResult['value1']. " *F / </h4>";
@@ -145,7 +135,6 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) {
         $(function () {
             $('#dateStart').datetimepicker();
             $('#dateEnd').datetimepicker();
-            
             $( "#submitDataForm" ).click(function() {
               $( "#tempDataDateForm" ).submit();
             });
