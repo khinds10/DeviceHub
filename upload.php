@@ -5,9 +5,9 @@
     $device = $_GET['device'];
     $action = $_GET['action'];
     
-    // if it's 'sync' or 'upload' do the appropriate action
+    // if it's 'sync' or 'upload' do the appropriate action (add one second in case a device is using postgres to round up the microseconds)
     if ($action == 'sync') {
-        $sql = "SELECT time FROM devices WHERE device = '$device' ORDER BY time desc limit 1";
+        $sql = "SELECT time + INTERVAL 1 SECOND as time FROM devices WHERE device = '$device' ORDER BY time desc limit 1";
 
         // we just say yesterday if there's no data for this device yet
         $recentSyncResults = new stdClass();
