@@ -5,16 +5,7 @@
       </div>
       <div class="btn-group btn-group-justified" role="group">
          <div class="btn-group" role="group">
-            <a type="button" href="weatherclock.php?device=weather-clock" class="btn btn-default"><i class="glyphicon glyphicon-time"></i> Living</a>
-         </div>
-         <div class="btn-group" role="group">
-            <a type="button" href="weatherclock.php?device=weather-clock-white" class="btn btn-default"><i class="glyphicon glyphicon-time"></i> Bed</a>
-         </div>
-         <div class="btn-group" role="group">
-            <a type="button" href="weatherclock.php?device=weather-clock-duluth" class="btn btn-default"><i class="glyphicon glyphicon-screenshot"></i> Duluth</a>
-         </div>
-         <div class="btn-group" role="group">
-            <a type="button" href="weatherclock.php?device=trip-computer" class="btn btn-default"><i class="glyphicon glyphicon-road"></i> Car</a>
+            <a type="button" href="/" style="max-width: 100px;" class="btn btn-default"><i class="glyphicon glyphicon glyphicon-home"></i> Home</a>
          </div>
       </div>
    </div>

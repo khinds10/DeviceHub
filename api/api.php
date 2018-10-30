@@ -73,17 +73,11 @@ class API extends REST {
         $sql = "INSERT INTO devices (`device`";
         
         // insert all the readings field values to the query
-        foreach ($this->readings as $readingKey => $readingValue) {
-            $sql .= ",`" . $readingValue[0] . "`";
-        }
-        
+        foreach ($this->readings as $readingKey => $readingValue) $sql .= ",`" . $readingValue[0] . "`";
         $sql .= ") VALUES ( '".$this->device."'";
         
         // insert all the readings to the query
-        foreach ($this->readings as $readingKey => $readingValue) {
-            $sql .= ",'" . $readingValue[1] . "'";
-        }
-        
+        foreach ($this->readings as $readingKey => $readingValue) $sql .= ",'" . $readingValue[1] . "'";
         $sql .= ")";
 
         // insert query
@@ -121,9 +115,7 @@ class API extends REST {
         $sql = "SELECT * FROM devices WHERE `device` = '" . $this->device ."' ORDER BY `entry` DESC LIMIT 100";
         $myResults = array();
         if ($result = $this->db->query($sql)) {
-            while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                $myResults[] = $row;
-            }
+            while($row = $result->fetch_array(MYSQLI_ASSOC)) $myResults[] = $row;
             $this->response(json_encode($myResults, JSON_PRETTY_PRINT), 200);
         } else {
             $this->response("Error: No Records Found.", 500);
@@ -134,9 +126,7 @@ class API extends REST {
      * Encode array into JSON
      */
     private function json($data) {
-        if(is_array($data)) {
-            return json_encode($data);
-        }
+        if (is_array($data)) return json_encode($data);
     }
 }
  

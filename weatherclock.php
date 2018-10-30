@@ -100,9 +100,11 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) $dateRange = "`time`
         if ($result = $db->query($sql)) {
             while($row = $result->fetch_array(MYSQLI_ASSOC)) $myResults[] = $row;
         }
-        foreach ($myResults as $myResult) 
-            print "<h4> Inside: " . $myResult['value1']. " *F / </h4>";
-            print "<h4> Inside: " . $myResult['value2']. " %</h4>";
+        foreach ($myResults as $myResult) {
+            $tempColor = file_get_contents(TEMPCOLORAPI . '/?temperature=' . $myResult['value1']);
+            print "<h4> <span style='color:$tempColor'>Inside: " . $myResult['value1']. " *F </span> / </h4>";
+            print "<h4> Inside: " . $myResult['value2']. " %</h4>";   
+        }   
         ?>
     
     <div class="row">
@@ -130,7 +132,7 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) $dateRange = "`time`
                 </button>
             </div>
         </form>
-    </div>
+    </div><br/>
     <script type="text/javascript">
         $(function () {
             $('#dateStart').datetimepicker();
