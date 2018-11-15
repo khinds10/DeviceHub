@@ -91,8 +91,8 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) $dateRange = "`time`
   }
 </script>
 <div class="container">
-    <h1><?=ucwords(preg_replace('/\-/',' ',$device))?></h1>
-    
+        <h1><?=ucwords(preg_replace('/\-/',' ',$device))?></h1>
+        
         <?php
         // get most recent readings from device 
         $sql = "SELECT * FROM devices WHERE `device` = '" . $device ."' ORDER BY `entry` DESC LIMIT 1";
@@ -101,12 +101,21 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) $dateRange = "`time`
             while($row = $result->fetch_array(MYSQLI_ASSOC)) $myResults[] = $row;
         }
         foreach ($myResults as $myResult) {
+        
+            // get the device last updated time with the timezone accounted for
+            $deviceGTMTime = new DateTime($myResult['time'], new DateTimeZone('GMT'));
+            $userTimezone = new DateTimeZone('America/New_York');
+            $timestamp = strtotime($myResult['time']) + (int) $userTimezone->getOffset($deviceGTMTime);
+            $lastUpdate = date("M. j, g:i a", $timestamp);
+            
+            // get temp colors and display current device stats
             $tempColor = file_get_contents(TEMPCOLORAPI . '/?temperature=' . $myResult['value1']);
+            $humidityColor = file_get_contents(TEMPCOLORAPI . '/humidity?humidity=' . $myResult['value2']);
             print "<h4> <span style='color:$tempColor'>Inside: " . $myResult['value1']. " *F </span> / </h4>";
-            print "<h4> Inside: " . $myResult['value2']. " %</h4>";   
+            print "<h4> <span style='color:$humidityColor'>Inside: " . $myResult['value2']. " %</span></h4>";
+            print "<h6> <span>$lastUpdate</span></h6>";
         }   
         ?>
-    
     <div class="row">
         <form method="post" name="tempDataDateForm" id="tempDataDateForm">
             <div class="col-md-3">
