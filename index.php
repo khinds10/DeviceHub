@@ -104,7 +104,7 @@ $hourly = $currentWeather->hourly->summary;
         <br/><br/>
                                 
         <h3 style="color:yellow;">Sunrise - <?=$sunRiseTime;?></h3><hr/>
-        <!--img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"/-->
+        <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"/>
 
     </div>    
 <?php
