@@ -6,7 +6,9 @@ include 'includes/nav.php';
 date_default_timezone_set('EST');
 $currentWeather = json_decode(file_get_contents(WEATHERAPI));
 $sunRiseTime = '';
-if (isset($currentWeather->daily->data[0]->sunriseTime)) $sunRiseTime = date("M. jS, <br/>g:i a", $currentWeather->daily->data[0]->sunriseTime);  
+if (isset($currentWeather->daily->data[0]->sunriseTime)) $sunRiseTime = date("M. jS, <br/>g:i a", $currentWeather->daily->data[0]->sunriseTime);
+$sunSetTime = '';
+if (isset($currentWeather->daily->data[0]->sunsetTime)) $sunSetTime = date("M. jS, <br/>g:i a", $currentWeather->daily->data[0]->sunsetTime);
 
 // current weather conditions with color coding
 $apparentTemperature = round($currentWeather->currently->apparentTemperature);
@@ -105,6 +107,9 @@ $hourly = $currentWeather->hourly->summary;
                                 
         <h3 style="color:yellow;">Sunrise - <?=$sunRiseTime;?></h3><hr/>
         <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"/>
+
+        <h3 style="color:yellow;">Sunset - <?=$sunSetTime;?></h3><hr/>
+        <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful-sunset.jpg?<?=rand()?>"/>
 
     </div>    
 <?php
