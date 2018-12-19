@@ -68,7 +68,7 @@ $hourly = $currentWeather->hourly->summary;
             if ($device == 'weather-clock-duluth') $icon = "glyphicon glyphicon-screenshot";
             if ($device == 'trip-computer') $icon = "glyphicon glyphicon-road";
         ?>
-                <a href="weatherclock.php?device=<?=$device?>"><h3><i class='<?=$icon?>'></i> <?=$deviceName?></h3></a>
+                <a href="weatherclock.php?device=<?=$device?>"><h4><i class='<?=$icon?>'></i> <?=$deviceName?></h4></a>
                 <?php
                 // get most recent readings from device 
                 $sql = "SELECT * FROM devices WHERE `device` = '" . $device ."' ORDER BY `entry` DESC LIMIT 1";
@@ -78,7 +78,7 @@ $hourly = $currentWeather->hourly->summary;
                 foreach ($myResults as $myResult) {
                     $tempColor = file_get_contents(TEMPCOLORAPI . '/?temperature=' . $myResult['value1']);
                     $humidityColor = file_get_contents(TEMPCOLORAPI . '/humidity?humidity=' . $myResult['value2']);
-                    print "<h4 style='padding-left:25px;'><span style='color:$tempColor;'>Inside: " . $myResult['value1']. " *F </span> / <span style='color:$humidityColor;'>Inside: " . $myResult['value2']. " %</span></h4>";
+                    print "<h5 style='padding-left:25px;'><span style='color:$tempColor;'>Inside: " . $myResult['value1']. " *F </span> / <span style='color:$humidityColor;'>Inside: " . $myResult['value2']. " %</span></h5>";
                 }
                 ?>
         <?php
@@ -97,20 +97,31 @@ $hourly = $currentWeather->hourly->summary;
             <span style="color:<?=$temperatureMaxColor?>">High: <?=$temperatureMax?>*F </span> / <span style="color:<?=$temperatureMinColor?>">Low: <?=$temperatureMin?>*F </span><br/><br/>
             Next Hour: <?=$hourly?><br/>
         </div>
-
-        <h3>Front</h3>
-        <img class="border-image" src="<?=MYWEBCAMURL?>webcam.jpg?<?=rand()?>"/>
         <br/><br/>
-        <h3>Back</h3>
-        <img class="border-image" src="<?=MYWEBCAMURL?>webcam-rear.jpg?<?=rand()?>"/>
+        <h3>Webcam Views</h3><hr/>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-3">
+              <h3 style="color:yellow;">Sunrise</h3>
+              <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"/>
+              <?=$sunRiseTime;?>
+            </div>    
+            <div class="col-sm-3">
+              <h3>Front</h3>
+              <img class="border-image" src="<?=MYWEBCAMURL?>webcam.jpg?<?=rand()?>"/>
+            </div>
+            <div class="col-sm-3">
+              <h3>Back</h3>
+              <img class="border-image" src="<?=MYWEBCAMURL?>webcam-rear.jpg?<?=rand()?>"/>
+            </div>
+            <div class="col-sm-3">
+              <h3 style="color:yellow;">Sunset</h3>
+              <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful-sunset.jpg?<?=rand()?>"/>
+              <?=$sunSetTime;?>
+            </div>
+          </div>
+        </div>
         <br/><br/>
-                                
-        <h3 style="color:yellow;">Sunrise - <?=$sunRiseTime;?></h3><hr/>
-        <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"/>
-
-        <h3 style="color:yellow;">Sunset - <?=$sunSetTime;?></h3><hr/>
-        <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful-sunset.jpg?<?=rand()?>"/>
-
     </div>    
 <?php
 include 'includes/footer.php';
