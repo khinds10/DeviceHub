@@ -55,12 +55,14 @@ $hourly = $currentWeather->hourly->summary;
         <h3>Current Devices</h3><hr/>
         <?php
         $devices = array(
-                'weather-clock-red' => 'Sam'
+                'weather-clock-attic' => 'Attic'
+                , 'weather-clock-red' => 'Sam'
                 , 'weather-clock-yellow' => 'Guest'
                 , 'weather-clock-white' => 'Bed'
                 , 'weather-clock' => 'Living'
                 , 'weather-clock-small-white' => 'Kitchen'
                 , 'weather-clock-gray' => 'Basement'
+                , 'weather-clock-duluth' => 'Duluth'
             );
             
         foreach ($devices as $device => $deviceName) { 
