@@ -62,6 +62,7 @@ $hourly = $currentWeather->hourly->summary;
                 , 'weather-clock' => 'Living'
                 , 'weather-clock-small-white' => 'Kitchen'
                 , 'weather-clock-gray' => 'Basement'
+                , 'weather-clock-nissan' => 'Nissan'
                 , 'weather-clock-duluth' => 'Duluth'
             );
             
@@ -81,6 +82,9 @@ $hourly = $currentWeather->hourly->summary;
                     $tempColor = file_get_contents(TEMPCOLORAPI . '/?temperature=' . $myResult['value1']);
                     $humidityColor = file_get_contents(TEMPCOLORAPI . '/humidity?humidity=' . $myResult['value2']);
                     print "<h5 style='padding-left:25px;'><span style='color:$tempColor;'>Inside: " . $myResult['value1']. " *F </span> / <span style='color:$humidityColor;'>Inside: " . $myResult['value2']. " %</span></h5>";
+                    if ($myResult['device'] == 'weather-clock-nissan') {
+                        $carConditions = "<h5 style='padding-left:25px;'><span style='color:$tempColor;'>" . $myResult['value1']. " *F </span> / <span style='color:$humidityColor;'> " . $myResult['value2']. " %</span></h5>";;
+                    }
                 }
                 ?>
         <?php
@@ -89,7 +93,13 @@ $hourly = $currentWeather->hourly->summary;
         <br/><br/>
         <h3>Home Heatmap</h3><hr/>
         <img class="border-image" src="<?=CLOCKHEATMAP?>/img/house.jpg?<?=rand()?>"/>
-
+        <hr/>
+        <div style="position: relative;">
+            <img class="border-image" src="/img/car.png?<?=rand()?>" style="max-width: 350px; margin-left: 175px;"/>
+            <div style="position: absolute; top: 50px; left:300px;">
+                <?=$carConditions?>
+            </div>
+        </div>
         <br/><br/>
         <h3>Current Conditions</h3><hr/>
 
@@ -105,20 +115,20 @@ $hourly = $currentWeather->hourly->summary;
           <div class="row">
             <div class="col-sm-3">
               <h3 style="color:yellow;">Sunrise</h3>
-              <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"/>
+              <a href="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"><img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"/></a>
               <?=$sunRiseTime;?>
             </div>    
             <div class="col-sm-3">
               <h3>Front</h3>
-              <img class="border-image" src="<?=MYWEBCAMURL?>webcam.jpg?<?=rand()?>"/>
+              <a href="<?=MYWEBCAMURL?>webcam.jpg?<?=rand()?>"><img class="border-image" src="<?=MYWEBCAMURL?>webcam.jpg?<?=rand()?>"/></a>
             </div>
             <div class="col-sm-3">
               <h3>Back</h3>
-              <img class="border-image" src="<?=MYWEBCAMURL?>webcam-rear.jpg?<?=rand()?>"/>
+              <a href="<?=MYWEBCAMURL?>webcam-rear.jpg?<?=rand()?>"><img class="border-image" src="<?=MYWEBCAMURL?>webcam-rear.jpg?<?=rand()?>"/></a>
             </div>
             <div class="col-sm-3">
               <h3 style="color:yellow;">Sunset</h3>
-              <img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful-sunset.jpg?<?=rand()?>"/>
+              <a href="<?=MYWEBCAMURL?>/mostColorful-sunset.jpg?<?=rand()?>"><img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful-sunset.jpg?<?=rand()?>"/></a>
               <?=$sunSetTime;?>
             </div>
           </div>
