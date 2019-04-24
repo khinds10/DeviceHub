@@ -105,6 +105,7 @@
          foreach ($devices as $device => $deviceName) { 
              $icon = "glyphicon glyphicon-time";
              if ($device == 'weather-clock-duluth') $icon = "glyphicon glyphicon-screenshot";
+             if ($device == 'weather-clock-nissan') $icon = "glyphicon glyphicon-modal-window";
              if ($device == 'trip-computer') $icon = "glyphicon glyphicon-road";
          ?>
       <a href="weatherclock.php?device=<?=$device?>">
