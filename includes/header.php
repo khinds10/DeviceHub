@@ -17,5 +17,15 @@ $db = new mysqli(DB_SERVER,DB_USER,DB_PASSWORD,DB);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/js/skycons.js"></script>
+    <script>
+	    // based on current conditions set the "skycon" animated canvas
+        function setWeatherIcon(element, icon) {
+        	var icons = new Skycons({"color": "white"}),
+            list  = ["clear-day", "clear-night", "partly-cloudy-day","partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind","fog"],i;
+          	for(i = list.length; i--; ) icons.set(element, icon);
+          	icons.play();
+        };
+    </script>
   </head>
   <body>
