@@ -83,8 +83,7 @@ class REST {
                 $this->_request = $this->cleanInputs($_GET);
                 break;
             case "PUT":
-                parse_str(file_get_contents("php://input"),$this->_request);
-                $this->_request = $this->cleanInputs($this->_request);
+                $this->_request = (array) json_decode(file_get_contents("php://input"));
                 break;
             default:
                 $this->response('',406);
@@ -99,9 +98,6 @@ class REST {
                 $clean_input[$k] = $this->cleanInputs($v);
             }
         }else{
-            if(get_magic_quotes_gpc()) {
-                $data = trim(stripslashes($data));
-            }
             $data = strip_tags($data);
             $clean_input = trim($data);
         }

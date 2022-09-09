@@ -87,12 +87,20 @@ class API extends REST {
             $this->response("Error: " . $sql . "<br>" . $this->db->error, 500);
         }
     }
+    
+    /**
+     * weather clock device log current conditions
+     */
+    private function logJSON () {
+        $this->processRequest(); 
+        $this->logRequestDB(); 
+    }
 
     /**
      * weather clock device log current conditions
      */
     private function log () {
-    
+
         // validate request is POST
         if ($this->get_request_method() != "POST") $this->response('', 406);
         

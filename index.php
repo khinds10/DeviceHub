@@ -15,8 +15,8 @@
    if (isset($currentWeather->daily->data[0]->sunsetTime)) $sunSetTime = date("M. jS, <br/>g:i a", $currentWeather->daily->data[0]->sunsetTime);
    
    // current weather conditions with color coding
-   $apparentTemperature = round($currentWeather->currently->apparentTemperature);
-   $apparentTemperatureColor = file_get_contents(TEMPCOLORAPI . '/?temperature=' . $apparentTemperature);
+   $temperature = round($currentWeather->currently->temperature);
+   $temperatureColor = file_get_contents(TEMPCOLORAPI . '/?temperature=' . $temperature);
    
    $temperatureMax = round($currentWeather->daily->data[0]->temperatureMax);
    $temperatureMaxColor = file_get_contents(TEMPCOLORAPI . '/?temperature=' . $temperatureMax);
@@ -72,7 +72,7 @@
             
             <canvas id="weatherIcon" width="80" height="80"></canvas><br/>
          
-            <span style="color:<?=$apparentTemperatureColor?>"> <?=$apparentTemperature?>*F </span> / <span style="color:<?=$humidityOutsideColor?>"><?=$humidity?>%</span> [<?=$summary?>]<br/>
+            <span style="color:<?=$temperatureColor?>"> <?=$temperature?>*F </span> / <span style="color:<?=$humidityOutsideColor?>"><?=$humidity?>%</span> [<?=$summary?>]<br/>
             Wind: <?=$windSpeed?> mph / Clouds: <?=$cloudCover?>%<br/>
             <span style="color:<?=$temperatureMaxColor?>">High: <?=$temperatureMax?>*F </span> / <span style="color:<?=$temperatureMinColor?>">Low: <?=$temperatureMin?>*F </span><br/><br/>
          </div>
@@ -91,21 +91,18 @@
       <hr/>
       <?php
          $devices = array(
-                 'weather-clock-attic' => 'Attic'
-                 , 'weather-clock-red' => 'Sam'
-                 , 'weather-clock-yellow' => 'Guest'
-                 , 'weather-clock-white' => 'Bed'
-                 , 'weather-clock' => 'Living'
-                 , 'weather-clock-small-white' => 'Kitchen'
-                 , 'weather-clock-gray' => 'Basement'
-                 , 'weather-clock-nissan' => 'Nissan'
-                 , 'weather-clock-duluth' => 'Duluth'
+                 'temp-check-attic' => 'Attic'
+                 , 'temp-check-sam' => 'Sam'
+                 , 'temp-check-guest' => 'Guest'
+                 , 'temp-check-bedroom' => 'Bed'
+                 , 'temp-check-livingroom' => 'Living'
+                 , 'temp-check-kitchen' => 'Kitchen'
+                 , 'temp-check-basement ' => 'Basement'
              );
-             
+      
          foreach ($devices as $device => $deviceName) { 
              $icon = "glyphicon glyphicon-time";
              if ($device == 'weather-clock-duluth') $icon = "glyphicon glyphicon-screenshot";
-             if ($device == 'weather-clock-nissan') $icon = "glyphicon glyphicon-modal-window";
              if ($device == 'trip-computer') $icon = "glyphicon glyphicon-road";
          ?>
       <a href="weatherclock.php?device=<?=$device?>">
@@ -121,9 +118,6 @@
              $tempColor = file_get_contents(TEMPCOLORAPI . '/?temperature=' . $myResult['value1']);
              $humidityColor = file_get_contents(TEMPCOLORAPI . '/humidity?humidity=' . $myResult['value2']);
              print "<h5 style='padding-left:25px;'><span style='color:$tempColor;'>Inside: " . $myResult['value1']. " *F </span> / <span style='color:$humidityColor;'>Inside: " . $myResult['value2']. " %</span></h5>";
-             if ($myResult['device'] == 'weather-clock-nissan') {
-                 $carConditions = "<h5 style='padding-left:25px;'><span style='color:$tempColor;'>" . $myResult['value1']. " *F </span> / <span style='color:$humidityColor;'> " . $myResult['value2']. " %</span></h5>";;
-             }
          }
          ?>
       <?php
@@ -134,49 +128,6 @@
       <h3>Home Heatmap</h3>
       <hr/>
       <img class="border-image" src="<?=CLOCKHEATMAP?>/img/house.jpg?<?=rand()?>"/>
-      <hr/>
-      <div style="position: relative;">
-         <img class="border-image" src="/img/car.png?<?=rand()?>"/>
-         <div style="position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%);">
-            <?=$carConditions?>
-         </div>
-      </div>
-   </div>
-</div>
-<div class="container">
-   <div class="col-sm-12">
-      <h3>Views</h3>
-      <hr/>
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-3">
-               <h3 style="color:yellow;">Sunrise</h3>
-               <a href="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"><img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful.jpg?<?=rand()?>"/></a>
-               <?=$sunRiseTime;?>
-            </div>
-            <div class="col-sm-3">
-               <h3>Front</h3>
-               <a href="<?=MYWEBCAMURL?>webcam.jpg?<?=rand()?>"><img class="border-image" src="<?=MYWEBCAMURL?>webcam.jpg?<?=rand()?>"/></a>
-            </div>
-            <div class="col-sm-3">
-               <h3>Back</h3>
-               <a href="<?=MYWEBCAMURL?>webcam-rear.jpg?<?=rand()?>"><img class="border-image" src="<?=MYWEBCAMURL?>webcam-rear.jpg?<?=rand()?>"/></a>
-            </div>
-            <div class="col-sm-3">
-               <h3 style="color:yellow;">Sunset</h3>
-               <a href="<?=MYWEBCAMURL?>/mostColorful-sunset.jpg?<?=rand()?>"><img class="border-image" src="<?=MYWEBCAMURL?>/mostColorful-sunset.jpg?<?=rand()?>"/></a>
-               <?=$sunSetTime;?>
-            </div>
-         </div>
-      </div>
-      <br/><br/>
-   </div>
-</div>
-<div class="container">
-   <div class="col-sm-12">
-      <h3>Message</h3>
-      <hr/>
-      <?=$currentMessage->message?>
    </div>
 </div>
 <br/><br/>
