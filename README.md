@@ -38,8 +38,6 @@ Copy the files from this project to a PHP enabled webhost of your choice with a 
 
 Copy the `settings.shadow.php` file to a file named `settings.php` with the correct credentials for your MySQL instance
 
-Also if you have the Temperature API project (https://github.com/khinds10/TemperatureAPI) installed that's also producing heatmaps, configure URLs here as well.
-
 ## RPi Project python example to upload data
 
 Python dependancy
